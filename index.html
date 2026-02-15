@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarData Explorer | Professional Database</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div id="loading-overlay" class="hidden"><span class="loader"></span></div>
+
+    <div id="layout">
+        <!-- Sidebar -->
+        <aside>
+            <div class="brand">
+                <div class="brand-wrapper">
+                    <div class="brand-icon-container">
+                        <i data-lucide="car" class="brand-icon"></i>
+                    </div>
+                    <h1>CarData Explorer</h1>
+                </div>
+                <button id="theme-btn" class="theme-toggle"><i data-lucide="moon" id="theme-icon"></i></button>
+            </div>
+
+            <div class="filter-section">
+                <!-- Simple Filtering Section -->
+                <div class="filter-group">
+                    <label>Simple Filtering</label>
+                    <select id="make-select">
+                        <option value="">All Manufacturers</option>
+                    </select>
+                    <select id="model-select" disabled>
+                        <option value="">Select Manufacturer first</option>
+                    </select>
+                    <select id="trim-select" disabled>
+                        <option value="">Select Model first</option>
+                    </select>
+                </div>
+
+                <div class="filter-divider"></div>
+
+                <!-- Advanced Filtering Section -->
+                <div class="filter-group">
+                    <label>Keyword Search</label>
+                    <input type="text" id="search-input" placeholder="Search anything...">
+                </div>
+
+                <div class="filter-group">
+                    <label>Release Year</label>
+                    <div class="range-grid">
+                        <select id="year-min">
+                            <option value="">Min</option>
+                        </select>
+                        <select id="year-max">
+                            <option value="">Max</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="switch-row" style="justify-content: flex-start; gap: 0.75rem;">
+                        <label class="switch">
+                            <input type="checkbox" id="us-only">
+                            <span class="slider"></span>
+                        </label>
+                        <label class="switch-label">Show Only US Models</label>
+                    </div>
+                </div>
+
+                <!-- More Advanced Filters -->
+                <div class="filter-group">
+                    <label>Body Style</label>
+                    <select id="body-style">
+                        <option value="">Any Body Style</option>
+                        <option value="Sedan">Sedan</option>
+                        <option value="Coupe">Coupe</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Pickup">Pickup</option>
+                        <option value="Convertible">Convertible</option>
+                        <option value="Wagon">Wagon</option>
+                        <option value="Hatchback">Hatchback</option>
+                        <option value="Minivan">Minivan</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <nav class="nav-links">
+                    <button class="nav-btn active" data-view="tree-view">
+                        <i data-lucide="layers" class="nav-icon"></i>
+                        <span>Tree Browser</span>
+                    </button>
+                    <button class="nav-btn" data-view="grid-view">
+                        <i data-lucide="layout-grid" class="nav-icon"></i>
+                        <span>Card Explorer</span>
+                    </button>
+                    <button class="nav-btn" data-view="list-view">
+                        <i data-lucide="table" class="nav-icon"></i>
+                        <span>Data Table</span>
+                    </button>
+                </nav>
+                <a href="https://github.com/your-repo/cardata-explorer" class="github-btn" target="_blank">
+                    <span>GitHub Repository</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main>
+            <header class="main-header">
+                <h2>Universal Database</h2>
+                <p id="result-count">Initializing engine...</p>
+            </header>
+
+            <div class="content-body">
+                <!-- Views -->
+                <section id="tree-view" class="view-content">
+                    <div id="tree-root"></div>
+                </section>
+
+                <section id="grid-view" class="view-content hidden">
+                    <div id="car-grid" class="grid"></div>
+                </section>
+
+                <section id="list-view" class="view-content hidden">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Manufacturer</th>
+                                    <th>Model Name</th>
+                                    <th>Year</th>
+                                    <th>Variant</th>
+                                    <th style="text-align:right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="car-table-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="detail-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:2rem;">
+                <div>
+                    <span class="card-badge">Specifications</span>
+                    <h2 id="modal-title" style="font-size:2rem; margin-top:0.5rem;">Car Details</h2>
+                </div>
+                <button id="close-modal" class="close-modal-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div id="specs-root" class="specs-grid"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

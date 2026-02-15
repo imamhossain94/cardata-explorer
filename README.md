@@ -4,7 +4,7 @@ CarData Explorer is a premium, high-performance web application designed for bro
 
 ### [Live Demo](https://imamhossain94.github.io/cardata-explorer/)
 
-![CarData Explorer Preview](preview/card_explorer.png)
+![CarData Explorer Preview](preview/data_table.png)
 
 ---
 
